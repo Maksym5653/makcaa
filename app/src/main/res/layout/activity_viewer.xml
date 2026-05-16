@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#070710">
+
+    <!-- ═══ СІТКА КАМЕР — динамічний split-screen ═══
+         1 камера  → займає весь екран (columnSpec span=2)
+         2 камери  → ліво / право
+         3 камери  → top-L / top-R / bottom (span=2)
+         4 камери  → 2×2
+    -->
+    <android.widget.GridLayout
+        android:id="@+id/cameraGrid"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:rowCount="2"
+        android:columnCount="2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvAlarm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- ── Камера 1 (top-left або full) ── -->
+        <FrameLayout
+            android:id="@+id/videoView1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="fill"
+            android:background="#0B0B18"
+            android:visibility="gone">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#14FFFFFF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="📷"
+                android:textSize="36sp"
+                android:alpha="0.12"/>
+
+            <TextView
+                android:id="@+id/tvCamera1Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="#DD070710"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
+                android:textColor="#90CAF9"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tvCamera1Status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:visibility="gone"/>
+        </FrameLayout>
+
+        <!-- ── Камера 2 (top-right) ── -->
+        <FrameLayout
+            android:id="@+id/videoView2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="fill"
+            android:background="#0B0B18"
+            android:visibility="gone">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#10FFFFFF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="📷"
+                android:textSize="36sp"
+                android:alpha="0.12"/>
+
+            <TextView
+                android:id="@+id/tvCamera2Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="#DD070710"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
+                android:textColor="#80CBC4"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tvCamera2Status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:visibility="gone"/>
+        </FrameLayout>
+
+        <!-- ── Камера 3 (bottom-left або full-width) ── -->
+        <FrameLayout
+            android:id="@+id/videoView3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="fill"
+            android:background="#0B0B18"
+            android:visibility="gone">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#0CFFFFFF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="📷"
+                android:textSize="36sp"
+                android:alpha="0.12"/>
+
+            <TextView
+                android:id="@+id/tvCamera3Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="#DD070710"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
+                android:textColor="#CE93D8"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tvCamera3Status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:visibility="gone"/>
+        </FrameLayout>
+
+        <!-- ── Камера 4 (bottom-right) ── -->
+        <FrameLayout
+            android:id="@+id/videoView4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="fill"
+            android:background="#0B0B18"
+            android:visibility="gone">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#08FFFFFF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="📷"
+                android:textSize="36sp"
+                android:alpha="0.12"/>
+
+            <TextView
+                android:id="@+id/tvCamera4Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="#DD070710"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
+                android:textColor="#FFB74D"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tvCamera4Status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:visibility="gone"/>
+        </FrameLayout>
+
+    </android.widget.GridLayout>
+
+    <!-- Порожній стан -->
+    <LinearLayout
+        android:id="@+id/tvEmpty"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvAlarm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🐾"
+            android:textSize="60sp"
+            android:alpha="0.25"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Немає підключених камер"
+            android:textColor="#445566"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Натисни «+ Камера» або «📷 QR»"
+            android:textColor="#334455"
+            android:textSize="13sp"
+            android:layout_marginTop="6dp"/>
+    </LinearLayout>
+
+    <!-- невидимий (для binding compatibility) -->
+    <View android:id="@+id/divider"
+        android:layout_width="0dp" android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvAlarm"/>
+
+    <!-- ═══ СТАТУС ТРИВОГИ ═══ -->
+    <TextView
+        android:id="@+id/tvAlarm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Немає камер"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="10dp"
+        android:background="#1A1A2E"
+        app:layout_constraintBottom_toTopOf="@+id/statusBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- ═══ СТАТУС-РЯДОК ═══ -->
+    <LinearLayout
+        android:id="@+id/statusBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#0D0D1A"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tvEsp32Status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="ESP32 …"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            android:padding="5dp"
+            android:background="#1A1A2E"
+            android:layout_marginEnd="5dp"/>
+
+        <Button
+            android:id="@+id/btnPairing"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="🔑 —"
+            android:textSize="10sp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#880000"
+            android:layout_marginEnd="5dp"/>
+
+        <Button
+            android:id="@+id/btnEsp32"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="ℹ️"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#1A237E"
+            android:layout_marginEnd="5dp"/>
+
+        <Button
+            android:id="@+id/btnAudio"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="🔊 Звук"
+            android:textSize="10sp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#263238"/>
+
+    </LinearLayout>
+
+    <!-- ═══ НИЖНЯ ПАНЕЛЬ ═══ -->
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#070710"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:text="+ Кам."
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            android:backgroundTint="#1B5E20"
+            android:layout_marginEnd="4dp"/>
+
+        <Button
+            android:id="@+id/btnAddQr"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:text="📷 QR"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            android:backgroundTint="#1565C0"
+            android:layout_marginEnd="4dp"/>
+
+        <Button
+            android:id="@+id/btnTorchRemote"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:text="🔦"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#37474F"
+            android:layout_marginEnd="4dp"/>
+
+        <Button
+            android:id="@+id/btnMicRemote"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:text="🎙"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#37474F"
+            android:layout_marginEnd="4dp"/>
+
+        <Button
+            android:id="@+id/btnTest"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:text="🔔"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#BF360C"
+            android:layout_marginEnd="4dp"/>
+
+        <Button
+            android:id="@+id/btnDisconnect"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:text="✕"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#B71C1C"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
